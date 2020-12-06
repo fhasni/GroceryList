@@ -23,7 +23,7 @@
                                 <tableRow identifier="GroceryRow" id="mky-Z4-ZpQ" customClass="GroceryRow" customModule="GroceryListWatch_WatchKit_Extension">
                                     <group key="rootItem" width="1" alignment="left" id="avk-SM-afT">
                                         <items>
-                                            <label alignment="left" verticalAlignment="center" text="Label" id="hw3-8M-iUf"/>
+                                            <label alignment="left" verticalAlignment="center" text="Item" id="hw3-8M-iUf"/>
                                         </items>
                                     </group>
                                     <connections>
@@ -32,9 +32,11 @@
                                 </tableRow>
                             </items>
                         </table>
+                        <label width="1" alignment="left" text="You have nothing to buy" textAlignment="center" numberOfLines="0" id="klq-6M-W1w"/>
                     </items>
                     <connections>
                         <outlet property="addItemBtn" destination="NXK-XT-wXw" id="JGR-P9-uLc"/>
+                        <outlet property="emptyListLabel" destination="klq-6M-W1w" id="tYI-Nh-wYm"/>
                         <outlet property="groceryTable" destination="dCY-Ox-nzS" id="JSb-Ed-H64"/>
                     </connections>
                 </controller>

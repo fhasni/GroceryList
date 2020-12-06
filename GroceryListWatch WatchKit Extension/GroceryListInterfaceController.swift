@@ -15,6 +15,8 @@ class GroceryListInterfaceController: WKInterfaceController {
     
     @IBOutlet weak var groceryTable: WKInterfaceTable!
     
+    @IBOutlet weak var emptyListLabel: WKInterfaceLabel!
+
     private var items : [String] = []
     
     private var initialSuggestions : [String] = ["Bread", "Milk", "Eggs", "Cheese"]
@@ -47,11 +49,19 @@ class GroceryListInterfaceController: WKInterfaceController {
     
     
     func loadTable() {
-        groceryTable.setNumberOfRows(items.count, withRowType: GroceryRow.identifier)
-        for (index, item) in items.enumerated() {
-            let groceryRow = groceryTable.rowController(at: index) as? GroceryRow
-            groceryRow?.label.setText(item)
+        
+        groceryTable.setHidden(items.count == 0)
+        
+        emptyListLabel.setHidden(items.count > 0)
+        
+        if (items.count > 0 ) {
+            groceryTable.setNumberOfRows(items.count, withRowType: GroceryRow.identifier)
+            for (index, item) in items.enumerated() {
+                let groceryRow = groceryTable.rowController(at: index) as? GroceryRow
+                groceryRow?.label.setText(item)
+            }
         }
+        
     }
     
     func addItem(_ item: String) {
