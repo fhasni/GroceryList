@@ -21,6 +21,8 @@ class GroceryListInterfaceController: WKInterfaceController {
     
     private var initialSuggestions : [String] = ["Bread", "Milk", "Eggs", "Cheese"]
     
+    private var userDefaults = UserDefaults()
+        
     override func awake(withContext context: Any?) {
         // Configure interface objects here.
         loadTable()
@@ -34,7 +36,6 @@ class GroceryListInterfaceController: WKInterfaceController {
                 self?.addItem(newItem)
             }
         }
-        
     }
     
     override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
@@ -49,7 +50,8 @@ class GroceryListInterfaceController: WKInterfaceController {
     
     
     func loadTable() {
-        
+        items = userDefaults.value(forKey: "items") as? [String] ?? []
+
         groceryTable.setHidden(items.count == 0)
         
         emptyListLabel.setHidden(items.count > 0)
@@ -61,19 +63,23 @@ class GroceryListInterfaceController: WKInterfaceController {
                 groceryRow?.label.setText(item)
             }
         }
-        
     }
     
     func addItem(_ item: String) {
         print("DEBUG: adding item: \(item)")
 
         items.append(item)
+        userDefaults.setValue(items, forKey: "items")
+
         loadTable()
     }
     
     func deleteItem(at index: Int) {
         print("DEBUG: deleting item at index: \(index)")
+        
         items.remove(at: index)
+        userDefaults.setValue(items, forKey: "items")
+
         loadTable()
     }
     
